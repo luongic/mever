@@ -160,7 +160,7 @@ const render = function(){
   const htmls = projects.map(item => {
     return `<div class="col-xl-3 col-lg-4 col-md-6">
               <div class="gallery-item h-100">
-                <img src="${item.url}" class="img-fluid" alt="">
+                <img src=".${item.url}" class="img-fluid" alt="">
                 <div class="gallery-links d-flex align-items-center justify-content-center">
                   <a href="${item.link}" target='_blank' title="Gallery 1" class="glightbox preview-link"><i class="bi bi-box-arrow-up-right"></i></a>
                   <a href="${item.git}" target='_blank' class="details-link"><i class="bi bi-github"></i></a>
