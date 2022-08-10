@@ -168,8 +168,9 @@ const render = function(){
               </div>
           </div>`
   })
-  listPro.innerHTML = htmls
-
+  
+  listPro.innerHTML = htmls.join("")
+  console.log(htmls);
 }
 
 render()
