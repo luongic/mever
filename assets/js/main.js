@@ -149,7 +149,19 @@ const projects = [
       url: '/assets/img/musicplayer.png',
       link: 'https://luongic.github.io/m2p/',
       git: 'https://github.com/luongic/m2p'
-  }
+  },
+  {
+    name: 'CSS Certificate',
+    url: '/assets/img/certifycateCSSHackerrank.png',
+    link: 'https://www.hackerrank.com/certificates/b41839f800cd',
+    git: 'https://www.hackerrank.com/certificates/b41839f800cd'
+},
+{
+    name: 'React (Basic) Certificate',
+    url: '/assets/img/certifycateReactHackerrank.png',
+    link: 'https://www.hackerrank.com/certificates/894129fd9b89',
+    git: 'https://www.hackerrank.com/certificates/894129fd9b89'
+},
 ]
 
 const listPro = document.querySelector('.view3__content')
