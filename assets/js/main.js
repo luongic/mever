@@ -133,10 +133,10 @@ const projects = [
       git: 'https://github.com/luongic/What-s-Next-Sample'
   },
   {
-      name: 'Clone UI Shopee ',
+      name: 'Dummy Shopee ',
       url: '/assets/img/shopeeUI.png',
-      link: 'https://luongic.github.io/shopeeClone/',
-      git: 'https://github.com/luongic/shopeeClone'
+      link: 'https://shopeeredux.netlify.app/',
+      git: 'https://github.com/luongic/shopeereact'
   },
   {
       name: 'Clone UI Instagram ',
