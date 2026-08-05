@@ -1,0 +1,1260 @@
+/* ==========================================================================
+   DESIGN SYSTEM - SPIDER-MAN & FC BARCELONA (BLAUGRANA & MESSI 10)
+   ========================================================================== */
+
+:root {
+  /* Color Palette */
+  --bg-dark: #060b19; /* Deep Spider-Man/Barca space blue */
+  --bg-card: rgba(14, 23, 47, 0.75); /* Glassmorphic deep blue */
+  --bg-card-hover: rgba(22, 36, 74, 0.9);
+
+  --color-spidey-red: #ff0055; /* Spidey Neon Red */
+  --color-barca-garnet: #a50044; /* Barca Garnet */
+  --color-barca-blue: #004d98; /* Barca Royal Blue */
+  --color-messi-gold: #fcb316; /* Messi's Ballon d'Or Gold */
+  --color-web-blue: #00f2fe; /* Web line / Electra blue */
+  --color-text-light: #fafafa;
+  --color-text-gray: #a0aec0;
+
+  /* Fonts */
+  --font-default: 'Montserrat', sans-serif;
+  --font-heading: 'Barlow Condensed', sans-serif;
+
+  /* Transitions */
+  --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  user-select: none;
+}
+
+/* ==========================================================================
+   GENERAL STYLES & RESET
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-default);
+  background-color: var(--bg-dark);
+  color: var(--color-text-light);
+  overflow-x: hidden;
+}
+
+/* Hide scrollbar while keeping page scrollable */
+html {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+a {
+  color: var(--color-web-blue);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+a:hover {
+  color: var(--color-spidey-red);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  letter-spacing: 1px;
+}
+
+/* Background Canvas */
+#spidey-web-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Glassmorphism Card base */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 30px;
+  transition: var(--transition-smooth);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  position: relative;
+  overflow: hidden;
+}
+.glass-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 0, 85, 0.4);
+  box-shadow: 0 12px 40px 0 rgba(255, 0, 85, 0.15);
+}
+
+/* Section Header */
+.section-title {
+  margin-bottom: 50px;
+}
+.section-title h2 {
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--color-text-light);
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  display: inline-block;
+  position: relative;
+}
+.section-title h2::after {
+  content: '';
+  display: block;
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--color-spidey-red),
+    var(--color-barca-blue)
+  );
+  margin: 8px auto 0;
+  border-radius: 2px;
+}
+.section-title p {
+  font-size: 16px;
+  color: var(--color-messi-gold);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 5px;
+}
+
+/* ==========================================================================
+   HEADER & NAVBAR
+   ========================================================================== */
+
+.header {
+  transition: var(--transition-smooth);
+  z-index: 997;
+  padding: 20px 0;
+  background-color: rgba(6, 11, 25, 0.85);
+  backdrop-filter: blur(8px);
+  height: 80px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.header.header-scrolled {
+  height: 70px;
+  padding: 15px 0;
+  background-color: rgba(6, 11, 25, 0.95);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(255, 0, 85, 0.2);
+}
+
+.header .logo h1 {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--color-text-light);
+  margin: 0 0 0 10px;
+  display: flex;
+  align-items: center;
+}
+.logo-spidey-icon {
+  font-size: 28px;
+  color: var(--color-spidey-red);
+  animation: floatIcon 3s ease-in-out infinite;
+}
+.header .logo .shirt-number {
+  color: var(--color-messi-gold);
+  font-size: 34px;
+  margin-left: 2px;
+  text-shadow: 0 0 10px rgba(252, 179, 22, 0.6);
+}
+
+/* Desktop Navigation */
+.navbar {
+  padding: 0;
+}
+.navbar ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+.navbar a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0 10px 30px;
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: var(--color-text-gray);
+  white-space: nowrap;
+}
+.navbar a:hover,
+.navbar .active,
+.navbar li:hover > a {
+  color: var(--color-spidey-red);
+  text-shadow: 0 0 10px rgba(255, 0, 85, 0.4);
+}
+
+.header-social-links a {
+  color: var(--color-text-gray);
+  padding-left: 20px;
+  display: inline-block;
+  font-size: 18px;
+  transition: var(--transition-smooth);
+}
+.header-social-links a:hover {
+  color: var(--color-messi-gold);
+  transform: scale(1.2);
+}
+
+/* Mobile Nav Toggles */
+.mobile-nav-toggle {
+  color: var(--color-text-light);
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 0;
+  transition: 0.5s;
+  display: none;
+}
+
+@media (max-width: 991px) {
+  .mobile-nav-toggle {
+    display: block;
+  }
+  .navbar {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    max-width: 300px;
+    bottom: 0;
+    transition: 0.3s;
+    z-index: 9997;
+  }
+  .navbar ul {
+    position: absolute;
+    inset: 0;
+    padding: 80px 0 30px 0;
+    margin: 0;
+    background: rgba(6, 11, 25, 0.95);
+    backdrop-filter: blur(15px);
+    overflow-y: auto;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .navbar a {
+    padding: 15px 30px;
+    font-size: 22px;
+    width: 100%;
+  }
+  .mobile-nav-active .navbar {
+    right: 0;
+  }
+  .mobile-nav-active .navbar:before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9996;
+  }
+  .mobile-nav-active .mobile-nav-show {
+    display: none;
+  }
+  .mobile-nav-active .mobile-nav-hide {
+    display: block;
+    position: fixed;
+    right: 20px;
+    top: 25px;
+    z-index: 9999;
+  }
+}
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+
+.hero {
+  width: 100%;
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(165, 0, 68, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(0, 77, 152, 0.15) 0%,
+      transparent 50%
+    ),
+    #050811;
+  padding: 120px 0 60px;
+  position: relative;
+}
+
+.hero .web-intro {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-spidey-red);
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px rgba(255, 0, 85, 0.3);
+}
+
+.hero .name-title {
+  font-size: 58px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+.hero .name-title span {
+  color: var(--color-text-light);
+  position: relative;
+  z-index: 1;
+}
+.hero .name-title span::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(
+    90deg,
+    var(--color-barca-garnet),
+    var(--color-barca-blue)
+  );
+  z-index: -1;
+  border-radius: 4px;
+}
+
+.hero .typing-container {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-messi-gold);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.hero .typed-text {
+  text-shadow: 0 0 10px rgba(252, 179, 22, 0.4);
+}
+.hero .typed-cursor {
+  animation: blink 0.8s infinite;
+  color: var(--color-messi-gold);
+  font-weight: bold;
+}
+
+.hero .intro-desc {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text-gray);
+  max-width: 520px;
+}
+
+/* Actions Buttons */
+.btn-main-action {
+  padding: 12px 30px;
+  background: linear-gradient(135deg, var(--color-barca-garnet), #c00050);
+  border: 1px solid var(--color-spidey-red);
+  color: var(--color-text-light);
+  font-family: var(--font-heading);
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 30px;
+  box-shadow: 0 4px 15px rgba(255, 0, 85, 0.4);
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.btn-main-action:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 0, 85, 0.6);
+  color: #fff;
+}
+
+.btn-secondary-action {
+  padding: 12px 30px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--color-text-light);
+  font-family: var(--font-heading);
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 30px;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.btn-secondary-action:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-web-blue);
+  color: var(--color-web-blue);
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+}
+
+/* Avatar Image & Ring animations */
+.hero .contain-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.avatar-ring {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+}
+.avatar-ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--color-barca-garnet) 0%,
+    var(--color-barca-blue) 50%,
+    var(--color-messi-gold) 100%
+  );
+  animation: rotateRing 8s linear infinite;
+  z-index: 1;
+}
+.avatar-spider-glow {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  border: 2px dashed var(--color-spidey-red);
+  animation: spinCounter 16s linear infinite;
+  opacity: 0.7;
+  z-index: 3;
+}
+.img-avt {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid var(--bg-dark);
+  z-index: 2;
+}
+
+@keyframes rotateRing {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spinCounter {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@media (max-width: 991px) {
+  .hero {
+    padding: 100px 0 40px;
+    text-align: center;
+  }
+  .hero .name-title {
+    font-size: 42px;
+  }
+  .avatar-ring {
+    width: 250px;
+    height: 250px;
+    margin-top: 30px;
+  }
+}
+
+/* ==========================================================================
+   ABOUT SECTION
+   ========================================================================== */
+
+.about {
+  padding: 80px 0;
+  position: relative;
+}
+
+.about-card {
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Spidey grid background pattern overlay */
+.spidey-suit-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 0, 85, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 85, 0.03) 1px, transparent 1px);
+  background-size: 25px 25px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.badge-spidey-large {
+  font-size: 90px;
+  background: linear-gradient(
+    135deg,
+    var(--color-spidey-red),
+    var(--color-barca-garnet)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 15px rgba(255, 0, 85, 0.4));
+  animation: heartbeat 2.5s ease-in-out infinite;
+}
+
+.quote-header {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text-light);
+  line-height: 1.4;
+  font-style: italic;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.info-list {
+  list-style: none;
+  padding: 0;
+}
+.info-list li {
+  margin-bottom: 18px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+}
+.info-list li i {
+  font-size: 18px;
+  width: 30px;
+}
+.info-list li strong {
+  color: var(--color-text-light);
+  width: 140px;
+  display: inline-block;
+}
+.info-list li span,
+.info-list li a {
+  color: var(--color-text-gray);
+}
+.link-glow:hover {
+  color: var(--color-web-blue) !important;
+  text-shadow: 0 0 8px rgba(0, 242, 254, 0.5);
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.08);
+  }
+  40% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.08);
+  }
+  80% {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 767px) {
+  .info-list li {
+    flex-wrap: wrap;
+  }
+  .info-list li strong {
+    width: 100%;
+    margin-bottom: 2px;
+  }
+}
+
+/* ==========================================================================
+   EXPERIENCE SECTION (CAREER SEASONS TIMELINE)
+   ========================================================================== */
+
+.experience {
+  padding: 80px 0;
+  position: relative;
+}
+
+.timeline {
+  position: relative;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  background: linear-gradient(
+    180deg,
+    var(--color-spidey-red) 0%,
+    var(--color-barca-blue) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 50px;
+  width: 50%;
+  padding: 0 40px;
+}
+.timeline-item:nth-child(even) {
+  left: 50%;
+}
+.timeline-item:nth-child(odd) {
+  left: 0;
+}
+
+.timeline-icon {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-dark);
+  border: 4px solid var(--color-spidey-red);
+  color: var(--color-text-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  top: 15px;
+  z-index: 10;
+  box-shadow: 0 0 15px rgba(255, 0, 85, 0.5);
+}
+.timeline-item:nth-child(odd) .timeline-icon {
+  right: -20px;
+}
+.timeline-item:nth-child(even) .timeline-icon {
+  left: -20px;
+  border-color: var(--color-barca-blue);
+  box-shadow: 0 0 15px rgba(0, 77, 152, 0.5);
+}
+
+.timeline-content {
+  position: relative;
+}
+
+.season-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--color-text-gray);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.season-badge.active-season {
+  background: linear-gradient(
+    135deg,
+    var(--color-barca-garnet),
+    var(--color-barca-blue)
+  );
+  color: #fff;
+  border-color: var(--color-messi-gold);
+  box-shadow: 0 0 10px rgba(252, 179, 22, 0.3);
+}
+
+.timeline-content.season-card-active {
+  border-color: rgba(252, 179, 22, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(252, 179, 22, 0.1);
+}
+.timeline-content.season-card-active:hover {
+  border-color: var(--color-messi-gold);
+  box-shadow: 0 12px 40px 0 rgba(252, 179, 22, 0.25);
+}
+
+.role-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.company-name {
+  font-size: 16px;
+  color: var(--color-messi-gold);
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+.company-name i {
+  font-size: 14px;
+}
+
+.work-bullets {
+  padding-left: 15px;
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-text-gray);
+}
+.work-bullets li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.work-bullets strong {
+  color: var(--color-text-light);
+}
+
+/* Kick-off styles */
+.timeline-item .start-icon {
+  border-color: var(--color-messi-gold) !important;
+  box-shadow: 0 0 15px rgba(252, 179, 22, 0.5) !important;
+}
+.timeline-item .start-content {
+  padding: 15px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+.timeline-item .start-content h4 {
+  font-size: 18px;
+  color: var(--color-messi-gold);
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+.timeline-item .start-content p {
+  font-size: 13px;
+  color: var(--color-text-gray);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .timeline::before {
+    left: 20px;
+  }
+  .timeline-item {
+    width: 100%;
+    padding: 0 0 0 50px;
+    left: 0 !important;
+  }
+  .timeline-icon {
+    left: 0px !important;
+    right: auto !important;
+  }
+  .timeline-item .start-content {
+    text-align: left !important;
+  }
+}
+
+/* ==========================================================================
+   SKILLS SECTION
+   ========================================================================== */
+
+.skills {
+  padding: 80px 0;
+  position: relative;
+}
+
+.skill-group-card {
+  height: 100%;
+  border-radius: 16px;
+  transition: var(--transition-smooth);
+}
+.skill-group-card.active-group {
+  border-color: rgba(0, 242, 254, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 242, 254, 0.1);
+}
+
+/* Striker card hover style (Spidey Red theme) */
+.skill-group-card.striker-card:hover {
+  border-color: rgba(255, 0, 85, 0.4);
+  box-shadow: 0 12px 40px 0 rgba(255, 0, 85, 0.25);
+  background: rgba(255, 0, 85, 0.03);
+}
+
+/* Midfielder card hover style (Web Blue theme) */
+.skill-group-card.midfielder-card:hover {
+  border-color: var(--color-web-blue);
+  box-shadow: 0 12px 40px 0 rgba(0, 242, 254, 0.25);
+  background: rgba(0, 242, 254, 0.03);
+}
+
+/* Defense card hover style (Messi Gold theme) */
+.skill-group-card.defense-card:hover {
+  border-color: rgba(252, 179, 22, 0.4);
+  box-shadow: 0 12px 40px 0 rgba(252, 179, 22, 0.25);
+  background: rgba(252, 179, 22, 0.03);
+}
+
+.skill-group-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.skill-group-header i {
+  font-size: 24px;
+}
+.skill-group-header h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.striker-header i {
+  color: var(--color-spidey-red);
+}
+.striker-header h3 {
+  color: var(--color-spidey-red);
+}
+
+.midfielder-header i {
+  color: var(--color-web-blue);
+}
+.midfielder-header h3 {
+  color: var(--color-web-blue);
+}
+
+.defense-header i {
+  color: var(--color-messi-gold);
+}
+.defense-header h3 {
+  color: var(--color-messi-gold);
+}
+
+.skill-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.skill-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-light);
+  margin-bottom: 6px;
+}
+
+.skill-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.skill-level {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--color-text-gray);
+  transition: width 1.5s cubic-bezier(0.1, 0.8, 0.3, 1);
+}
+
+.striker-header ~ .skill-items .skill-level {
+  background: linear-gradient(
+    90deg,
+    var(--color-barca-garnet),
+    var(--color-spidey-red)
+  );
+}
+.midfielder-header ~ .skill-items .skill-level {
+  background: linear-gradient(
+    90deg,
+    var(--color-barca-blue),
+    var(--color-web-blue)
+  );
+}
+.defense-header ~ .skill-items .skill-level {
+  background: linear-gradient(
+    90deg,
+    var(--color-barca-blue),
+    var(--color-messi-gold)
+  );
+}
+
+/* ==========================================================================
+   TROPHY ROOM (GALLERY PROJECTS SECTION)
+   ========================================================================== */
+
+.gallery {
+  padding: 80px 0;
+  position: relative;
+}
+
+/* Filter buttons */
+.trophy-filters {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 10px;
+}
+.filter-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-text-gray);
+  padding: 8px 18px;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+.filter-btn:hover,
+.filter-btn.active {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--color-spidey-red);
+  color: var(--color-spidey-red);
+  box-shadow: 0 0 10px rgba(255, 0, 85, 0.2);
+}
+
+/* Project Cards */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.gallery-img-container {
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 16/10;
+}
+.gallery-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.gallery-links {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 11, 25, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  opacity: 0;
+  transition: var(--transition-smooth);
+  z-index: 5;
+}
+.gallery-links a {
+  width: 44px;
+  height: 44px;
+  background: var(--bg-dark);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: var(--color-text-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  transition: var(--transition-smooth);
+}
+.gallery-links a:hover {
+  background: var(--color-spidey-red);
+  border-color: var(--color-spidey-red);
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 0, 85, 0.5);
+}
+
+.gallery-item:hover .gallery-img-container img {
+  transform: scale(1.08);
+}
+.gallery-item:hover .gallery-links {
+  opacity: 1;
+}
+
+/* Project Info details */
+.gallery-info {
+  padding: 20px;
+}
+.project-category {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-messi-gold);
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+.project-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.project-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-text-gray);
+  margin-bottom: 15px;
+}
+
+/* Tech Tags Badges */
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tech-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  color: var(--color-text-gray);
+}
+.gallery-item:hover .tech-badge {
+  border-color: rgba(255, 0, 85, 0.2);
+  color: var(--color-text-light);
+}
+
+/* GLIGHTBOX CUSTOM STYLING OVERRIDES */
+.glightbox-clean .gslide-description {
+  background: var(--bg-dark) !important;
+  border-top: 1px solid rgba(255, 0, 85, 0.2);
+}
+.glightbox-clean .gslide-title {
+  color: var(--color-messi-gold) !important;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.footer {
+  padding: 40px 0;
+  background-color: #03060c;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+.footer-bug-logo i {
+  font-size: 24px;
+}
+.text-glow-red {
+  color: var(--color-spidey-red);
+  text-shadow: 0 0 10px rgba(255, 0, 85, 0.6);
+  animation: spinLoader 4s linear infinite;
+  display: inline-block;
+}
+
+.footer .copyright {
+  font-size: 14px;
+  color: var(--color-text-gray);
+}
+.footer .copyright strong {
+  color: var(--color-text-light);
+}
+
+.footer .credits {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+  font-style: italic;
+}
+
+/* ==========================================================================
+   SCROLL TOP BUTTON
+   ========================================================================== */
+
+.scroll-top {
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  right: 20px;
+  bottom: -20px;
+  z-index: 999;
+  background: var(--color-spidey-red);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: all 0.4s;
+  box-shadow: 0 4px 15px rgba(255, 0, 85, 0.4);
+}
+.scroll-top i {
+  font-size: 20px;
+  color: #fff;
+  line-height: 0;
+}
+.scroll-top:hover {
+  background: #ff2270;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 0, 85, 0.6);
+}
+.scroll-top.active {
+  visibility: visible;
+  opacity: 1;
+  bottom: 20px;
+}
+
+/* ==========================================================================
+   PRELOADER SCREEN
+   ========================================================================== */
+
+#preloader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  background-color: var(--bg-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease;
+}
+.spidey-loader {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.web-spinner {
+  width: 80px;
+  height: 80px;
+  border: 2px dashed var(--color-spidey-red);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spinLoader 1.5s linear infinite;
+}
+.loader-bug {
+  position: absolute;
+  top: 24px;
+  font-size: 28px;
+  color: var(--color-messi-gold);
+  animation: floatIcon 2s ease-in-out infinite;
+}
+.loader-text {
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(255, 0, 85, 0.4);
+}
+
+@keyframes spinLoader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes floatIcon {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   SPIDER-SENSE MODE INTERACTION
+   ========================================================================== */
+
+.spider-sense-alert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(14, 23, 47, 0.95);
+  border: 2px solid var(--color-spidey-red);
+  box-shadow: 0 0 40px rgba(255, 0, 85, 0.8);
+  border-radius: 20px;
+  padding: 30px;
+  z-index: 100000;
+  text-align: center;
+  color: #fff;
+  transition: opacity 0.5s ease;
+  max-width: 420px;
+  backdrop-filter: blur(10px);
+}
+.spider-sense-alert i {
+  font-size: 50px;
+  color: var(--color-messi-gold);
+  text-shadow: 0 0 15px rgba(252, 179, 22, 0.8);
+  display: inline-block;
+  margin-bottom: 15px;
+}
+.spider-sense-alert h3 {
+  font-size: 26px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+.spider-sense-alert p {
+  font-size: 14px;
+  color: var(--color-text-light);
+  line-height: 1.6;
+  margin: 0;
+}
+
+body.sense-active::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    circle,
+    transparent 50%,
+    rgba(255, 0, 85, 0.25) 100%
+  );
+  z-index: 99998;
+  pointer-events: none;
+  animation: pulseVignette 1.5s infinite alternate;
+}
+body.sense-active .glass-card {
+  border-color: rgba(255, 0, 85, 0.8);
+  box-shadow: 0 0 30px rgba(255, 0, 85, 0.4);
+}
+
+@keyframes pulseVignette {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
