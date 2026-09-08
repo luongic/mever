@@ -278,6 +278,24 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================================================================== */
   const projectsData = [
     {
+      name: 'OLMS — Custom Uniform CRM & ERP Platform',
+      category: 'personal',
+      categoryLabel: 'Friendly (Personal Demo)',
+      desc: 'Integrated CRM + ERP modular monolith platform specialized in custom uniform manufacturing. Built with DDD, Clean Architecture, NestJS, React, TypeORM, Redis, BullMQ & MUI across 13 core modules.',
+      url: 'assets/img/olms.png',
+      link: 'https://github.com/luongic/olms',
+      git: 'https://github.com/luongic/olms',
+      tags: [
+        'NestJS',
+        'React',
+        'TypeScript',
+        'DDD',
+        'Modular Monolith',
+        'TypeORM',
+        'MUI',
+      ],
+    },
+    {
       name: 'Automotive CRM & Commerce Ecosystem',
       category: 'professional',
       categoryLabel: 'Championship (Commercial)',
