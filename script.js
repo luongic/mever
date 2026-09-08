@@ -359,13 +359,19 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       name: 'Sash Room — Graduation Flower Sashes',
-      category: 'personal',
-      categoryLabel: 'Friendly (Personal Demo)',
+      category: 'professional',
+      categoryLabel: 'Championship (Commercial)',
       desc: 'Handcrafted graduation flower sashes web store & showcase platform in HCMC. Features soft pastel aesthetic, interactive custom order options, responsive gallery, and floating petal visual effects.',
       url: 'assets/img/sashroom.png',
       link: 'https://sashroom.vercel.app/',
       git: '#',
-      tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Web Design', 'E-commerce UI'],
+      tags: [
+        'HTML5',
+        'CSS3',
+        'JavaScript',
+        'Responsive Web Design',
+        'E-commerce UI',
+      ],
     },
     {
       name: 'HackerRank CSS Certificate',
