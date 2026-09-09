@@ -46,6 +46,53 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileNavHide.classList.toggle('d-none');
   }
 
+  // Close the drawer when the dimmed overlay is clicked. The overlay is
+  // .navbar's ::before, so those clicks land on .navbar itself; anything
+  // inside the panel is a descendant and must be ignored.
+  const navbarEl = document.getElementById('navbar');
+  if (navbarEl) {
+    navbarEl.addEventListener('click', (event) => {
+      if (
+        event.target === navbarEl &&
+        body.classList.contains('mobile-nav-active')
+      ) {
+        mobileNavToggle();
+      }
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     Below 991px the header collapses to a hamburger, so the social links move
+     into the drawer rather than being duplicated in the markup. The element is
+     relocated, not cloned, so there is only ever one copy in the DOM.
+     -------------------------------------------------------------------------- */
+  const socialLinks = document.querySelector('.header-social-links');
+  const navList = navbarEl && navbarEl.querySelector('ul');
+
+  if (socialLinks && navList) {
+    const headerParent = socialLinks.parentNode;
+    const headerAnchor = socialLinks.nextSibling; // put it back in the same slot
+    const navSlot = document.createElement('li');
+    navSlot.className = 'nav-social';
+
+    const compact = window.matchMedia('(max-width: 991px)');
+
+    const placeSocialLinks = () => {
+      if (compact.matches) {
+        if (socialLinks.parentNode !== navSlot) {
+          navSlot.appendChild(socialLinks);
+          navList.appendChild(navSlot);
+        }
+      } else if (navSlot.parentNode) {
+        headerParent.insertBefore(socialLinks, headerAnchor);
+        navSlot.remove();
+      }
+    };
+
+    placeSocialLinks();
+    compact.addEventListener('change', placeSocialLinks);
+  }
+
   // Close mobile nav when clicking a link
   document.querySelectorAll('#navbar a').forEach((navbarlink) => {
     if (!navbarlink.hash) return;

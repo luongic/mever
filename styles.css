@@ -342,10 +342,6 @@ html {
   .mobile-nav-toggle {
     display: block;
   }
-  /* keep the last social icon clear of the hamburger */
-  .header-social-links {
-    margin-right: 14px;
-  }
   .navbar {
     position: fixed;
     top: 0;
@@ -379,12 +375,55 @@ html {
   .mobile-nav-active .navbar {
     right: 0;
   }
+  /* The overlay is a child of .navbar, which is its own stacking context, so
+     this z-index is scoped to that context: it must be negative to sit behind
+     the panel (the ul is z-index: auto) rather than on top of it. */
   .mobile-nav-active .navbar:before {
     content: '';
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.45);
-    z-index: 9996;
+    z-index: -1;
+  }
+  /* .navbar is nested inside .header, so the whole drawer is capped by the
+     header's z-index. Lift the header while the drawer is open, otherwise
+     .scroll-top (999) paints over the overlay. */
+  .mobile-nav-active .header {
+    z-index: 9998;
+  }
+
+  /* Social links relocate into the drawer on mobile (moved by script.js) */
+  .nav-social {
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: var(--border-w) solid var(--border);
+  }
+  .nav-social .header-social-links {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  .nav-social .header-social-links a {
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    background: var(--surface);
+    border: var(--border-w) solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-smooth);
+  }
+  .nav-social .header-social-links a:hover {
+    background: var(--yellow);
+    color: var(--ink);
+  }
+  .nav-social .header-social-links a:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 0 var(--border);
   }
   .mobile-nav-active .mobile-nav-show {
     display: none;
