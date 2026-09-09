@@ -57,6 +57,123 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ==========================================================================
+     CONTEXT MENU WITH CONTACT LINKS
+     ========================================================================== */
+  const contactMenuItems = [
+    {
+      label: 'Download CV',
+      href: 'assets/files/LeHienLuong_Resume.docx',
+      icon: 'bi bi-file-earmark-arrow-down-fill',
+      accent: 'text-web',
+      download: true,
+    },
+    {
+      label: 'Email',
+      href: 'mailto:luongle249@gmail.com',
+      icon: 'bi bi-envelope-at-fill',
+      accent: 'text-crimson',
+    },
+    {
+      label: 'Phone',
+      href: 'tel:+84398123320',
+      icon: 'bi bi-telephone-fill',
+      accent: 'text-gold',
+    },
+    {
+      label: 'LinkedIn',
+      href: 'https://www.linkedin.com/in/luongleee/',
+      icon: 'bi bi-linkedin',
+      accent: 'text-blue',
+    },
+    {
+      label: 'GitHub',
+      href: 'https://github.com/luongic',
+      icon: 'bi bi-github',
+      accent: 'text-web',
+    },
+    {
+      label: 'Facebook',
+      href: 'https://www.facebook.com/luongic',
+      icon: 'bi bi-facebook',
+      accent: 'text-crimson',
+    },
+    {
+      label: 'Instagram',
+      href: 'https://www.instagram.com/luongleee/',
+      icon: 'bi bi-instagram',
+      accent: 'text-gold',
+    },
+  ];
+
+  const contactMenu = document.createElement('div');
+  contactMenu.id = 'context-contact-menu';
+  contactMenu.className = 'context-contact-menu';
+
+  const contactMenuHeader = document.createElement('div');
+  contactMenuHeader.className = 'context-contact-menu-header';
+  contactMenuHeader.innerHTML = '<span>My Contacts</span>';
+  contactMenu.appendChild(contactMenuHeader);
+
+  contactMenuItems.forEach(({ label, href, icon, accent, download }) => {
+    const menuItem = document.createElement('a');
+    menuItem.href = href;
+    menuItem.className = 'context-contact-menu-item';
+    menuItem.innerHTML = `
+      <i class="${icon} ${accent}"></i>
+      <span>${label}</span>
+    `;
+
+    if (download) {
+      menuItem.setAttribute('download', 'LeHienLuong_Resume.docx');
+    }
+
+    if (href.startsWith('http')) {
+      menuItem.target = '_blank';
+      menuItem.rel = 'noopener noreferrer';
+    }
+
+    contactMenu.appendChild(menuItem);
+  });
+
+  body.appendChild(contactMenu);
+
+  function hideContactMenu() {
+    contactMenu.classList.remove('visible');
+  }
+
+  function showContactMenu(clientX, clientY) {
+    contactMenu.classList.add('visible');
+
+    const menuWidth = contactMenu.offsetWidth || 220;
+    const menuHeight = contactMenu.offsetHeight || 260;
+
+    const maxLeft = window.innerWidth - menuWidth - 16;
+    const maxTop = window.innerHeight - menuHeight - 16;
+
+    contactMenu.style.left = `${Math.min(Math.max(clientX + 14, 16), maxLeft)}px`;
+    contactMenu.style.top = `${Math.min(Math.max(clientY + 14, 16), maxTop)}px`;
+  }
+
+  document.addEventListener('contextmenu', (event) => {
+    event.preventDefault();
+    showContactMenu(event.clientX, event.clientY);
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!contactMenu.contains(event.target)) {
+      hideContactMenu();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      hideContactMenu();
+    }
+  });
+
+  window.addEventListener('resize', hideContactMenu);
+
+  /* ==========================================================================
      HERO TYPEWRITER ANIMATION
      ========================================================================== */
   const typedWordElement = document.getElementById('typed-text');

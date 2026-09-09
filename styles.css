@@ -42,6 +42,90 @@ body {
   overflow-x: hidden;
 }
 
+.context-contact-menu {
+  position: fixed;
+  z-index: 99999;
+  min-width: 220px;
+  background: rgba(10, 18, 35, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease,
+    visibility 0.18s ease;
+  overflow: hidden;
+}
+
+.context-contact-menu.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.context-contact-menu-header {
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--color-messi-gold);
+}
+
+.context-contact-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  color: var(--color-text-light);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.context-contact-menu-item:last-child {
+  border-bottom: none;
+}
+
+.context-contact-menu-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--color-web-blue);
+  text-decoration: none;
+}
+
+.context-contact-menu-item i {
+  font-size: 16px;
+  width: 18px;
+  text-align: center;
+}
+
+.context-contact-menu-item .text-crimson {
+  color: var(--color-spidey-red);
+}
+
+.context-contact-menu-item .text-gold {
+  color: var(--color-messi-gold);
+}
+
+.context-contact-menu-item .text-blue {
+  color: var(--color-barca-blue);
+}
+
+.context-contact-menu-item .text-web {
+  color: var(--color-web-blue);
+}
+
 /* Hide scrollbar while keeping page scrollable */
 html {
   scrollbar-width: none; /* Firefox */
