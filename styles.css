@@ -163,7 +163,7 @@ html {
   display: none;
 }
 
-/* Particle field sits behind everything, above the page background */
+/* Particle field - disabled along with the canvas effect in script.js.
 #spidey-web-canvas {
   position: fixed;
   top: 0;
@@ -173,6 +173,7 @@ html {
   z-index: -1;
   pointer-events: none;
 }
+*/
 
 /* ==========================================================================
    LAYOUT PRIMITIVES
@@ -1135,9 +1136,6 @@ html {
   }
   .header .logo h1 {
     font-size: 22px;
-  }
-  .header .logo .shirt-number {
-    font-size: 16px;
   }
   .logo-spidey-icon {
     font-size: 19px;
