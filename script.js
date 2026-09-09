@@ -528,6 +528,16 @@ document.addEventListener('DOMContentLoaded', () => {
       git: '#',
       tags: ['React', 'State Management', 'Hooks'],
     },
+    {
+      name: 'Highest ranking archive — 34th global ranking',
+      category: 'certification',
+      categoryLabel: "Ballon d'Or (Certificate)",
+      desc: 'Highest ranking archive: 34th global ranking on CSSBattle.dev.',
+      url: 'assets/img/cssbattle34th.jpg',
+      link: 'https://cssbattle.dev/player/luongleee',
+      git: '#',
+      tags: ['CSSBattle', 'Frontend', 'Rankings'],
+    },
   ];
 
   const trophyGrid = document.getElementById('trophy-grid');
