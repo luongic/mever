@@ -7,19 +7,14 @@
 
 :root {
   /* --- Surfaces --- */
-  --background: #dfe5f2;
   --surface: #ffffff;
   --surface-alt: #f3f5fb;
 
   /* --- Ink --- */
-  --ink: #000000; /* 16.6:1 on background */
-  --ink-muted: #4a4a4a; /* 8.9:1 on surface  */
-  --ink-accent: #b31239; /* 6.9:1 on surface  */
+  --ink: #000000;
+  --ink-muted: #4a4a4a; /* >= 6.9:1 on every theme background */
 
-  /* --- Accents: flat, black text sits on all of them --- */
-  --main: #ff5470; /* black on it  6.8:1 */
-  --yellow: #ffdc58; /* black on it 15.6:1 */
-  --blue: #88aaee; /* black on it  9.0:1 */
+  /* --- Fixed: the "available" status dot reads green in every theme --- */
   --green: #a3e636; /* black on it 13.9:1 */
 
   /* --- Structure --- */
@@ -27,7 +22,6 @@
   --border-w: 2px;
   --border-w-thick: 3px;
   --radius: 5px;
-  --radius-lg: 8px;
 
   /* --- Offset shadows (never blurred) --- */
   --shadow-sm: 2px 2px 0 0 var(--border);
@@ -41,6 +35,43 @@
   /* --- Motion: short and snappy, nothing eased over long durations --- */
   --transition-smooth: all 0.12s ease-out;
 }
+
+/* ==========================================================================
+   COLOUR THEMES
+   Cycled by the Spider-Sense button. Structure (borders, shadows, radii,
+   type) never changes; only the four colour slots below do. Black text sits
+   on --main / --accent-2 / --accent-3 in every theme, so contrast is safe by
+   construction. Ratios noted per value.
+   ========================================================================== */
+
+:root,
+[data-theme='red'] {
+  --background: #dfe5f2; /* black on it 16.6:1 */
+  --main: #ff5470; /* black on it  6.8:1 */
+  --main-overlay: rgba(255, 84, 112, 0.88);
+  --accent-2: #ffdc58; /* black on it 15.6:1 */
+  --accent-3: #88aaee; /* black on it  9.0:1 */
+  --ink-accent: #b31239; /* 6.9:1 on surface, 5.4:1 on background */
+}
+
+[data-theme='blue'] {
+  --background: #fdf0e4; /* black on it 18.8:1 */
+  --main: #88aaee; /* black on it  9.0:1 */
+  --main-overlay: rgba(136, 170, 238, 0.9);
+  --accent-2: #a3e636; /* black on it 13.9:1 */
+  --accent-3: #ffdc58; /* black on it 15.6:1 */
+  --ink-accent: #1b4fa8; /* 7.7:1 on surface, 6.9:1 on background */
+}
+
+[data-theme='yellow'] {
+  --background: #e6e2f5; /* black on it 16.6:1 */
+  --main: #ffdc58; /* black on it 15.6:1 */
+  --main-overlay: rgba(255, 220, 88, 0.9);
+  --accent-2: #88aaee; /* black on it  9.0:1 */
+  --accent-3: #ff5470; /* black on it  6.8:1 */
+  --ink-accent: #8a4b00; /* 6.8:1 on surface, 5.4:1 on background */
+}
+
 
 /* ==========================================================================
    RESET & BASE
@@ -62,6 +93,7 @@ body {
   background-image: radial-gradient(rgba(0, 0, 0, 0.09) 1px, transparent 1px);
   background-size: 22px 22px;
   overflow-x: hidden;
+  transition: background-color 0.25s ease-out;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -178,7 +210,7 @@ html {
 
 .context-contact-menu-header {
   padding: 10px 14px;
-  background: var(--yellow);
+  background: var(--accent-2);
   border-bottom: var(--border-w) solid var(--border);
   font-size: 11px;
   font-weight: 800;
@@ -308,7 +340,7 @@ html {
 }
 .navbar a:hover,
 .navbar li:hover > a {
-  background: var(--yellow);
+  background: var(--accent-2);
   border-color: var(--border);
   color: var(--ink);
 }
@@ -418,7 +450,7 @@ html {
     transition: var(--transition-smooth);
   }
   .nav-social .header-social-links a:hover {
-    background: var(--yellow);
+    background: var(--accent-2);
     color: var(--ink);
   }
   .nav-social .header-social-links a:active {
@@ -455,7 +487,7 @@ html {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink);
-  background: var(--yellow);
+  background: var(--accent-2);
   border: var(--border-w) solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
@@ -491,7 +523,7 @@ html {
   margin-bottom: 18px;
 }
 .hero .typed-text {
-  background: var(--blue);
+  background: var(--accent-3);
   border: var(--border-w) solid var(--border);
   border-radius: 4px;
   padding: 1px 8px;
@@ -578,7 +610,7 @@ html {
   border-radius: 50%;
   z-index: 0;
   pointer-events: none;
-  background: var(--yellow);
+  background: var(--accent-2);
   border: var(--border-w-thick) solid var(--border);
   transform: translate3d(
     calc(-15px + var(--px, 0px) * -0.35),
@@ -595,7 +627,7 @@ html {
   border-radius: 50%;
   z-index: 0;
   pointer-events: none;
-  background: var(--blue);
+  background: var(--accent-3);
   border: var(--border-w-thick) solid var(--border);
   transform: translate3d(
     calc(16px + var(--px, 0px) * -0.35),
@@ -848,7 +880,7 @@ html {
 }
 .link-glow:hover {
   color: var(--ink) !important;
-  background: var(--yellow);
+  background: var(--accent-2);
   box-shadow: 0 2px 0 0 var(--border);
 }
 
@@ -947,7 +979,7 @@ html {
 }
 
 .timeline-content.season-card-active {
-  background: var(--yellow);
+  background: var(--accent-2);
 }
 
 .role-title {
@@ -1071,10 +1103,10 @@ html {
   background: var(--main);
 }
 .midfielder-header {
-  background: var(--blue);
+  background: var(--accent-3);
 }
 .defense-header {
-  background: var(--yellow);
+  background: var(--accent-2);
 }
 
 .skill-items {
@@ -1109,10 +1141,10 @@ html {
   background: var(--main);
 }
 .midfielder-header ~ .skill-items .skill-level {
-  background: var(--blue);
+  background: var(--accent-3);
 }
 .defense-header ~ .skill-items .skill-level {
-  background: var(--yellow);
+  background: var(--accent-2);
 }
 
 /* ==========================================================================
@@ -1144,7 +1176,7 @@ html {
   transition: var(--transition-smooth);
 }
 .filter-btn:hover {
-  background: var(--yellow);
+  background: var(--accent-2);
 }
 .filter-btn.active {
   background: var(--main);
@@ -1183,7 +1215,7 @@ html {
 .gallery-links {
   position: absolute;
   inset: 0;
-  background: rgba(255, 84, 112, 0.88);
+  background: var(--main-overlay);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1207,7 +1239,7 @@ html {
   transition: var(--transition-smooth);
 }
 .gallery-links a:hover {
-  background: var(--yellow);
+  background: var(--accent-2);
   color: var(--ink);
 }
 
@@ -1228,7 +1260,7 @@ html {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--ink);
-  background: var(--yellow);
+  background: var(--accent-2);
   border: var(--border-w) solid var(--border);
   border-radius: 3px;
   padding: 2px 7px;
@@ -1333,7 +1365,7 @@ html {
   line-height: 0;
 }
 .scroll-top:hover {
-  background: var(--yellow);
+  background: var(--accent-2);
 }
 .scroll-top.active {
   visibility: visible;
@@ -1384,7 +1416,7 @@ html {
   color: var(--ink);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  background: var(--yellow);
+  background: var(--accent-2);
   border: var(--border-w) solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
@@ -1412,65 +1444,77 @@ html {
 }
 
 /* ==========================================================================
-   SPIDER-SENSE MODE (opt-in easter egg)
+   SPIDER-SENSE MODE — THEME CYCLER
    ========================================================================== */
 
-.spider-sense-alert {
+/* Swatch inside the button, showing the theme that is currently applied */
+.theme-swatch {
+  width: 16px;
+  height: 16px;
+  border: var(--border-w) solid var(--border);
+  border-radius: 3px;
+  background: var(--main);
+  flex: none;
+}
+
+/* Toast confirming the swap */
+.theme-toast {
   position: fixed;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--yellow);
+  bottom: 28px;
+  transform: translateX(-50%) translateY(12px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  background: var(--surface);
   border: var(--border-w-thick) solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
-  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
   z-index: 100000;
-  text-align: center;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--ink);
-  transition: opacity 0.4s ease;
-  max-width: 420px;
+  white-space: nowrap;
+  opacity: 0;
+  transition:
+    opacity 0.18s ease-out,
+    transform 0.18s ease-out;
 }
-.spider-sense-alert i {
-  font-size: 46px;
-  color: var(--ink);
-  display: inline-block;
-  margin-bottom: 14px;
+.theme-toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
-.spider-sense-alert h3 {
-  font-size: 25px;
-  font-weight: 900;
-  color: var(--ink);
-  margin-bottom: 10px;
-  letter-spacing: -0.02em;
+.theme-toast i {
+  font-size: 16px;
 }
-.spider-sense-alert p {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--ink);
-  line-height: 1.6;
-  margin: 0;
+.theme-toast-swatches {
+  display: flex;
+  gap: 5px;
+}
+.theme-toast-swatches span {
+  width: 15px;
+  height: 15px;
+  border: var(--border-w) solid var(--border);
+  border-radius: 3px;
+}
+.theme-toast-swatches span:nth-child(1) {
+  background: var(--main);
+}
+.theme-toast-swatches span:nth-child(2) {
+  background: var(--accent-2);
+}
+.theme-toast-swatches span:nth-child(3) {
+  background: var(--accent-3);
 }
 
-body.sense-active::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  border: 12px solid var(--main);
-  z-index: 99998;
-  pointer-events: none;
-  animation: pulseVignette 2.4s ease-in-out infinite alternate;
-}
-body.sense-active .glass-card {
-  background: var(--blue);
-}
-
-@keyframes pulseVignette {
-  0% {
-    opacity: 0.45;
-  }
-  100% {
-    opacity: 1;
+@media (max-width: 575px) {
+  .theme-toast {
+    font-size: 11px;
+    padding: 10px 14px;
+    gap: 9px;
   }
 }
 

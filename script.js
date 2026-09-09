@@ -93,6 +93,30 @@ document.addEventListener('DOMContentLoaded', () => {
     compact.addEventListener('change', placeSocialLinks);
   }
 
+  /* ==========================================================================
+     YEARS OF EXPERIENCE
+     Counted in whole calendar months from data-since, then floored to half a
+     year so the figure reads the way a CV does ("3.5+", "4+") and never
+     rounds up to a length not yet worked. The value in the markup is the
+     no-JS fallback.
+     ========================================================================== */
+  document.querySelectorAll('.years-count').forEach((el) => {
+    const since = new Date(`${el.dataset.since}T00:00:00`);
+    if (Number.isNaN(since.getTime())) return;
+
+    const now = new Date();
+    let months =
+      (now.getFullYear() - since.getFullYear()) * 12 +
+      (now.getMonth() - since.getMonth());
+    if (now.getDate() < since.getDate()) months -= 1;
+    if (months < 0) months = 0;
+
+    const halfYears = Math.floor(months / 6) / 2;
+    el.textContent = Number.isInteger(halfYears)
+      ? String(halfYears)
+      : halfYears.toFixed(1);
+  });
+
   // Close mobile nav when clicking a link
   document.querySelectorAll('#navbar a').forEach((navbarlink) => {
     if (!navbarlink.hash) return;
@@ -267,33 +291,74 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ==========================================================================
-     SPIDER-SENSE MODE BUTTON
+     SPIDER-SENSE MODE — COLOUR THEME CYCLER
+     Cycles the palette red -> blue -> yellow. The applied theme is just an
+     attribute on <html>; every colour token is redefined per [data-theme] in
+     styles.css, so nothing here touches individual elements. The choice is
+     stored in localStorage and re-applied by the inline bootstrap in <head>,
+     which runs before first paint.
      ========================================================================== */
+  const THEMES = [
+    { id: 'red', label: 'Crimson' },
+    { id: 'blue', label: 'Web Blue' },
+    { id: 'yellow', label: "Ballon d'Or" },
+  ];
+  const THEME_KEY = 'luongic-theme';
   const spideySenseBtn = document.getElementById('spider-sense-btn');
+
   if (spideySenseBtn) {
+    let toast = null;
+    let toastTimer = null;
+
+    const currentThemeIndex = () => {
+      const applied = document.documentElement.getAttribute('data-theme');
+      const index = THEMES.findIndex((theme) => theme.id === applied);
+      return index === -1 ? 0 : index;
+    };
+
+    const showToast = (theme) => {
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.className = 'theme-toast';
+        toast.setAttribute('role', 'status');
+        toast.setAttribute('aria-live', 'polite');
+        body.appendChild(toast);
+      }
+      toast.innerHTML =
+        '<i class="bi bi-lightning-charge-fill"></i>' +
+        '<span>Spider-Sense: ' +
+        theme.label +
+        '</span>' +
+        '<span class="theme-toast-swatches">' +
+        '<span></span><span></span><span></span></span>';
+
+      // Reflow so the transition replays when the same node is reused
+      void toast.offsetWidth;
+      toast.classList.add('visible');
+
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('visible'), 2200);
+    };
+
+    const applyTheme = (theme, announce) => {
+      document.documentElement.setAttribute('data-theme', theme.id);
+      spideySenseBtn.setAttribute(
+        'aria-label',
+        `Spider-Sense Mode: ${theme.label} theme. Activate to change colours.`
+      );
+      try {
+        localStorage.setItem(THEME_KEY, theme.id);
+      } catch (err) {
+        /* storage blocked - the theme simply will not persist */
+      }
+      if (announce) showToast(theme);
+    };
+
+    // Sync the label with whatever the head bootstrap already applied
+    applyTheme(THEMES[currentThemeIndex()], false);
+
     spideySenseBtn.addEventListener('click', () => {
-      // Trigger glowing alert
-      const sensorDiv = document.createElement('div');
-      sensorDiv.className = 'spider-sense-alert';
-      sensorDiv.innerHTML = `
-        <div class="alert-content">
-          <i class="bi bi-lightning-charge-fill animate-pulse"></i>
-          <h3>SPIDER-SENSE TINGLING!</h3>
-          <p>Analyzing portfolio... All pages fully optimized for compilation speed & visual greatness!</p>
-        </div>
-      `;
-      body.appendChild(sensorDiv);
-
-      // Add pulsing crimson filter effect to page
-      body.classList.add('sense-active');
-
-      setTimeout(() => {
-        sensorDiv.style.opacity = '0';
-        setTimeout(() => {
-          sensorDiv.remove();
-          body.classList.remove('sense-active');
-        }, 500);
-      }, 3500);
+      applyTheme(THEMES[(currentThemeIndex() + 1) % THEMES.length], true);
     });
   }
 

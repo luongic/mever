@@ -18,6 +18,19 @@
     <link href="assets/img/logo.ico" rel="icon" />
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
 
+    <!-- Apply the saved colour theme before first paint, so reloading on a
+         non-default theme does not flash the red one. -->
+    <script>
+      try {
+        var savedTheme = localStorage.getItem('luongic-theme');
+        if (['red', 'blue', 'yellow'].indexOf(savedTheme) !== -1) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+      } catch (e) {
+        /* storage blocked - fall back to the default theme */
+      }
+    </script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -144,6 +157,7 @@
                 >
                 <button id="spider-sense-btn" class="btn-secondary-action">
                   <i class="bi bi-lightning-charge-fill"></i> Spider-Sense Mode
+                  <span class="theme-swatch" aria-hidden="true"></span>
                 </button>
               </div>
             </div>
@@ -162,9 +176,9 @@
                   alt="Lê Hiền Lương"
                   fetchpriority="high"
                 />
-                <div class="avatar-caption" aria-hidden="true">
+                <!-- <div class="avatar-caption" aria-hidden="true">
                   <span class="avatar-dot"></span> Open to collaborate
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -217,7 +231,11 @@
                       <li>
                         <i class="bi bi-award-fill text-gold"></i>
                         <strong>Experience:</strong>
-                        <span>3.5+ Years (Commercial Pitch)</span>
+                        <span
+                          ><span class="years-count" data-since="2022-12-01"
+                            >3.5</span
+                          >+ Years (Commercial Pitch)</span
+                        >
                       </li>
                       <li>
                         <i class="bi bi-mortarboard-fill text-crimson"></i>
