@@ -251,6 +251,44 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ==========================================================================
+     HERO PORTRAIT PARALLAX
+     Pointer position drives --px / --py on the stage; each layer in the CSS
+     consumes them at a different multiplier, so the cut-out separates from
+     the disc behind it. Silent no-op when the user prefers reduced motion.
+     ========================================================================== */
+  const avatarStage = document.getElementById('avatar-stage');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  if (avatarStage && !reduceMotion.matches) {
+    const MAX_SHIFT = 14; // px the cut-out may travel from centre
+    let frame = null;
+
+    const applyShift = (relX, relY) => {
+      frame = null;
+      avatarStage.style.setProperty('--px', `${(relX * MAX_SHIFT).toFixed(2)}px`);
+      avatarStage.style.setProperty('--py', `${(relY * MAX_SHIFT).toFixed(2)}px`);
+    };
+
+    const queueShift = (relX, relY) => {
+      if (frame) cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => applyShift(relX, relY));
+    };
+
+    const heroSection = avatarStage.closest('.hero') || avatarStage;
+
+    heroSection.addEventListener('pointermove', (event) => {
+      if (event.pointerType === 'touch') return;
+      const rect = heroSection.getBoundingClientRect();
+      // -1 .. 1 relative to the centre of the hero
+      const relX = (event.clientX - rect.left) / rect.width - 0.5;
+      const relY = (event.clientY - rect.top) / rect.height - 0.5;
+      queueShift(relX * 2, relY * 2);
+    });
+
+    heroSection.addEventListener('pointerleave', () => queueShift(0, 0));
+  }
+
+  /* ==========================================================================
      CANVAS SPIDER-WEB INTERACTION
      ========================================================================== */
   const canvas = document.getElementById('spidey-web-canvas');
@@ -299,8 +337,8 @@ document.addEventListener('DOMContentLoaded', () => {
         this.radius = Math.random() * 2.5 + 1;
         this.color =
           Math.random() > 0.5
-            ? 'rgba(255, 0, 85, 0.4)'
-            : 'rgba(0, 77, 152, 0.4)'; // Crimson or Blue
+            ? 'rgba(138, 162, 200, 0.28)'
+            : 'rgba(176, 39, 63, 0.28)'; // Steel or garnet, kept faint
       }
 
       update() {
@@ -333,7 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const p = new Particle(x, y);
         p.vx = (Math.random() - 0.5) * 4;
         p.vy = (Math.random() - 0.5) * 4;
-        p.color = 'rgba(0, 242, 254, 0.7)'; // Web light blue
+        p.color = 'rgba(224, 104, 125, 0.5)'; // Garnet tint on click
         particles.push(p);
         if (particles.length > maxParticles + 15) {
           particles.shift();
@@ -358,7 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           if (dist < connectionDist) {
             const alpha = (1 - dist / connectionDist) * 0.15;
-            ctx.strokeStyle = `rgba(0, 242, 254, ${alpha})`; // Web blue line
+            ctx.strokeStyle = `rgba(152, 161, 176, ${alpha})`; // Neutral web line
             ctx.lineWidth = 0.5;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
@@ -375,7 +413,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           if (dist < connectionDist + 30) {
             const alpha = (1 - dist / (connectionDist + 30)) * 0.25;
-            ctx.strokeStyle = `rgba(255, 0, 85, ${alpha})`; // Crimson spidey sense web
+            ctx.strokeStyle = `rgba(176, 39, 63, ${alpha})`; // Garnet cursor web
             ctx.lineWidth = 0.7;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);

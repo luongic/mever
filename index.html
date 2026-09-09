@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
@@ -61,7 +61,7 @@
       >
         <a href="#hero" class="logo d-flex align-items-center me-auto me-lg-0">
           <span class="logo-spidey-icon"><i class="bi bi-bug-fill"></i></span>
-          <h1>LUONGiC<span class="shirt-number">19</span></h1>
+          <h1>LUONGiC</h1>
         </a>
 
         <nav id="navbar" class="navbar">
@@ -135,7 +135,7 @@
                 shooting webs or Messi dribbling past compilers.
               </p>
               <div
-                class="d-flex justify-content-center justify-content-lg-start gap-3 mt-4"
+                class="hero-actions d-flex justify-content-center justify-content-lg-start gap-3 mt-4"
                 data-aos="fade-up"
                 data-aos-delay="800"
               >
@@ -152,13 +152,19 @@
               data-aos="zoom-in"
               data-aos-delay="500"
             >
-              <div class="avatar-ring">
-                <div class="avatar-spider-glow"></div>
+              <div class="avatar-stage" id="avatar-stage">
+                <div class="avatar-halo" aria-hidden="true"></div>
+                <div class="avatar-disc" aria-hidden="true"></div>
+                <div class="avatar-arc" aria-hidden="true"></div>
                 <img
-                  src="assets/img/avt-9.png"
-                  class="img-avt"
-                  alt="Lê Hiền Lương Profile"
+                  src="assets/img/avt-9-rm.png"
+                  class="avatar-cutout"
+                  alt="Lê Hiền Lương"
+                  fetchpriority="high"
                 />
+                <div class="avatar-caption" aria-hidden="true">
+                  <span class="avatar-dot"></span> Open to collaborate
+                </div>
               </div>
             </div>
           </div>
@@ -539,7 +545,7 @@
       <div class="spidey-loader">
         <div class="web-spinner"></div>
         <div class="loader-bug"><i class="bi bi-bug-fill"></i></div>
-        <h3 class="loader-text mt-3">LUONGiC 10</h3>
+        <h3 class="loader-text mt-3">LUONGiC</h3>
       </div>
     </div>
 
