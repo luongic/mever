@@ -16,13 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================================================================== */
   const preloader = document.querySelector('#preloader');
   if (preloader) {
+    // Hand the page over as soon as it is ready - no artificial hold.
     window.addEventListener('load', () => {
-      setTimeout(() => {
-        preloader.style.opacity = '0';
-        setTimeout(() => {
-          preloader.remove();
-        }, 500);
-      }, 1000);
+      preloader.style.opacity = '0';
+      setTimeout(() => preloader.remove(), 300);
     });
   }
 
@@ -549,7 +546,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'personal',
       categoryLabel: 'Friendly (Personal Demo)',
       desc: 'Integrated CRM + ERP modular monolith platform specialized in custom uniform manufacturing. Built with DDD, Clean Architecture, NestJS, React, TypeORM, Redis, BullMQ & MUI across 13 core modules.',
-      url: 'assets/img/olms.png',
+      url: 'assets/img/olms.webp',
       link: 'https://olms-fe.vercel.app',
       git: 'https://github.com/luongic/olms',
       tags: [
@@ -567,7 +564,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'professional',
       categoryLabel: 'Championship (Commercial)',
       desc: 'Architected a unified automotive ecosystem linking three business modules (sales, rentals, e-commerce). Improved organic indexing using Next.js SSR/SSG. Integrated banking APIs.',
-      url: 'assets/img/automotive_crm.png',
+      url: 'assets/img/automotive_crm.webp',
       link: 'https://hanbiro.vn/',
       git: '#',
       tags: ['Next.js', 'React', 'SSR/SSG', 'REST API', 'Zustand'],
@@ -577,7 +574,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'professional',
       categoryLabel: 'Championship (Commercial)',
       desc: 'Developed an interactive Business Intelligence (BI) dashboard modeled after Tableau/PowerBI. Enables visual data analysis by dynamically rendering dashboards and charts from imported tabular sources (Excel) or active database connections.',
-      url: 'assets/img/bi_system.png',
+      url: 'assets/img/bi_system.webp',
       link: 'https://hanbiro.vn/',
       git: '#',
       tags: ['React', 'D3.js', 'SQL', 'Data Visualization'],
@@ -587,7 +584,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'professional',
       categoryLabel: 'Championship (Commercial)',
       desc: 'Reconstructed core client layouts for a large enterprise platform, consolidating calendars, messaging frames, and tasks. Optimized widget load efficiency.',
-      url: 'assets/img/groupware_v3.png',
+      url: 'assets/img/groupware_v3.webp',
       link: 'https://hanbiro.vn/',
       git: '#',
       tags: ['React.js', 'Recoil', 'Material UI', 'Socket.io'],
@@ -597,7 +594,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'professional',
       categoryLabel: 'Championship (Commercial)',
       desc: 'Maintained and scaled an automated sales pipeline CRM managing pricing calculators, contract flows, and products. Refactored legacy UI components.',
-      url: 'assets/img/vora_crm.png',
+      url: 'assets/img/vora_crm.webp',
       link: 'https://hanbiro.vn/',
       git: '#',
       tags: ['React.js', 'Redux', 'MUI', 'REST API'],
@@ -637,7 +634,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'professional',
       categoryLabel: 'Championship (Commercial)',
       desc: 'Cinematic media & production house showcase platform. Built with Next.js & Ant Design featuring futuristic dark cyberpunk UI, video showcase, interactive equipment catalog, and responsive layouts.',
-      url: 'assets/img/genz_production.png',
+      url: 'assets/img/genz_production.webp',
       link: 'https://genz-production.vercel.app/',
       git: '#',
       tags: ['Next.js', 'React', 'Ant Design', 'Tailwind CSS', 'UI/UX'],
@@ -647,7 +644,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'professional',
       categoryLabel: 'Championship (Commercial)',
       desc: 'Handcrafted graduation flower sashes web store & showcase platform in HCMC. Features soft pastel aesthetic, interactive custom order options, responsive gallery, and floating petal visual effects.',
-      url: 'assets/img/sashroom.png',
+      url: 'assets/img/sashroom.webp',
       link: 'https://sashroom.vercel.app/',
       git: '#',
       tags: [
@@ -663,7 +660,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'certification',
       categoryLabel: "Ballon d'Or (Certificate)",
       desc: 'HackerRank validation checking advanced selectors, flexbox, Grid, custom responsive rules, and layout structures.',
-      url: 'assets/img/certifycateCSSHackerrank.png',
+      url: 'assets/img/certifycateCSSHackerrank.webp',
       link: 'https://www.hackerrank.com/certificates/b41839f800cd',
       git: '#',
       tags: ['CSS3', 'Hackerrank', 'Layouts'],
@@ -673,7 +670,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'certification',
       categoryLabel: "Ballon d'Or (Certificate)",
       desc: 'HackerRank developer certificate validating components composition, state hook lifecycles, and context states.',
-      url: 'assets/img/certifycateReactHackerrank.png',
+      url: 'assets/img/certifycateReactHackerrank.webp',
       link: 'https://www.hackerrank.com/certificates/894129fd9b89',
       git: '#',
       tags: ['React', 'State Management', 'Hooks'],
@@ -683,7 +680,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'certification',
       categoryLabel: "Ballon d'Or (Certificate)",
       desc: 'Highest ranking archive: 34th global ranking on CSSBattle.dev.',
-      url: 'assets/img/cssbattle34th.jpg',
+      url: 'assets/img/cssbattle34th.webp',
       link: 'https://cssbattle.dev/player/luongleee',
       git: '#',
       tags: ['CSSBattle', 'Frontend', 'Rankings'],
@@ -716,7 +713,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="col-xl-3 col-lg-4 col-md-6 trophy-item" data-category="${item.category}">
           <div class="gallery-item glass-card h-100 p-0">
             <div class="gallery-img-container">
-              <img src="${item.url}" class="img-fluid" alt="${item.name}">
+              <img src="${item.url}" class="img-fluid" alt="${item.name}" loading="lazy" decoding="async">
               <div class="gallery-links">
                 <a href="${item.link}" target="_blank" title="Visit Live App" class="preview-link"><i class="bi bi-box-arrow-up-right"></i></a>
                 ${gitLink}
