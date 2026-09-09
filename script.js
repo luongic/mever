@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
       categoryLabel: 'Friendly (Personal Demo)',
       desc: 'Integrated CRM + ERP modular monolith platform specialized in custom uniform manufacturing. Built with DDD, Clean Architecture, NestJS, React, TypeORM, Redis, BullMQ & MUI across 13 core modules.',
       url: 'assets/img/olms.png',
-      link: 'https://github.com/luongic/olms',
+      link: 'https://olms-fe.vercel.app',
       git: 'https://github.com/luongic/olms',
       tags: [
         'NestJS',
