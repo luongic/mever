@@ -337,8 +337,8 @@ document.addEventListener('DOMContentLoaded', () => {
         this.radius = Math.random() * 2.5 + 1;
         this.color =
           Math.random() > 0.5
-            ? 'rgba(138, 162, 200, 0.28)'
-            : 'rgba(176, 39, 63, 0.28)'; // Steel or garnet, kept faint
+            ? 'rgba(0, 0, 0, 0.4)'
+            : 'rgba(255, 84, 112, 0.75)'; // Ink or main, flat
       }
 
       update() {
@@ -371,7 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const p = new Particle(x, y);
         p.vx = (Math.random() - 0.5) * 4;
         p.vy = (Math.random() - 0.5) * 4;
-        p.color = 'rgba(224, 104, 125, 0.5)'; // Garnet tint on click
+        p.color = 'rgba(255, 84, 112, 0.9)'; // Main colour on click
         particles.push(p);
         if (particles.length > maxParticles + 15) {
           particles.shift();
@@ -396,7 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           if (dist < connectionDist) {
             const alpha = (1 - dist / connectionDist) * 0.15;
-            ctx.strokeStyle = `rgba(152, 161, 176, ${alpha})`; // Neutral web line
+            ctx.strokeStyle = `rgba(0, 0, 0, ${alpha * 1.6})`; // Black web line
             ctx.lineWidth = 0.5;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
@@ -413,7 +413,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           if (dist < connectionDist + 30) {
             const alpha = (1 - dist / (connectionDist + 30)) * 0.25;
-            ctx.strokeStyle = `rgba(176, 39, 63, ${alpha})`; // Garnet cursor web
+            ctx.strokeStyle = `rgba(0, 0, 0, ${alpha * 1.8})`; // Black cursor web
             ctx.lineWidth = 0.7;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
