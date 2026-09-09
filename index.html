@@ -14,9 +14,15 @@
       name="keywords"
     />
 
-    <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon" type="image/png" />
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+    <!-- Favicons: favicon.svg is the source of truth; the PNGs are rasterised
+         from it for browsers without SVG icon support and for iOS. -->
+    <link href="assets/img/favicon.svg" rel="icon" type="image/svg+xml" />
+    <link href="assets/img/favicon.png" rel="icon" type="image/png" sizes="32x32" />
+    <link
+      href="assets/img/apple-touch-icon.png"
+      rel="apple-touch-icon"
+      sizes="180x180"
+    />
 
     <!-- Apply the saved colour theme before first paint, so reloading on a
          non-default theme does not flash the red one. -->

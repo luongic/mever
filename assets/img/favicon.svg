@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <title>LUONGiC</title>
+  <rect width="32" height="32" rx="7" fill="#ff5470"/>
+  <g transform="translate(16 16) scale(0.82) translate(-16 -16)"
+     fill="none" stroke="#000" stroke-width="2.4" stroke-linecap="round">
+    <path d="M12.4 11.6C9.6 10 8.2 7.6 7.9 5"/>
+    <path d="M11.4 14.4C8.4 14.2 6.2 13.2 4.6 11.3"/>
+    <path d="M11.4 17.8C8.4 18.2 6.3 19.5 5 21.7"/>
+    <path d="M12.6 20.6C10.4 22.4 9.2 24.7 8.9 27.2"/>
+    <path d="M19.6 11.6C22.4 10 23.8 7.6 24.1 5"/>
+    <path d="M20.6 14.4C23.6 14.2 25.8 13.2 27.4 11.3"/>
+    <path d="M20.6 17.8C23.6 18.2 25.7 19.5 27 21.7"/>
+    <path d="M19.4 20.6C21.6 22.4 22.8 24.7 23.1 27.2"/>
+    <ellipse cx="16" cy="19.2" rx="6.4" ry="7" fill="#000" stroke="none"/>
+    <circle cx="16" cy="10.6" r="4" fill="#000" stroke="none"/>
+  </g>
+</svg>
