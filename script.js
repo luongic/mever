@@ -341,7 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.documentElement.setAttribute('data-theme', theme.id);
       spideySenseBtn.setAttribute(
         'aria-label',
-        `Spider-Sense Mode: ${theme.label} theme. Activate to change colours.`
+        `Spider-Sense Mode: ${theme.label} theme. Activate to change colours.`,
       );
       try {
         localStorage.setItem(THEME_KEY, theme.id);
@@ -374,8 +374,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const applyShift = (relX, relY) => {
       frame = null;
-      avatarStage.style.setProperty('--px', `${(relX * MAX_SHIFT).toFixed(2)}px`);
-      avatarStage.style.setProperty('--py', `${(relY * MAX_SHIFT).toFixed(2)}px`);
+      avatarStage.style.setProperty(
+        '--px',
+        `${(relX * MAX_SHIFT).toFixed(2)}px`,
+      );
+      avatarStage.style.setProperty(
+        '--py',
+        `${(relY * MAX_SHIFT).toFixed(2)}px`,
+      );
     };
 
     const queueShift = (relX, relY) => {
@@ -405,145 +411,145 @@ document.addEventListener('DOMContentLoaded', () => {
      the canvas element, and the CSS rule.
      ========================================================================== */
 
-//   /* ==========================================================================
-//      CANVAS SPIDER-WEB INTERACTION
-//      ========================================================================== */
-//   const canvas = document.getElementById('spidey-web-canvas');
-//   if (canvas) {
-//     const ctx = canvas.getContext('2d');
-//     let particles = [];
-//     const maxParticles = 65;
-//     const connectionDist = 120;
-//     let mouse = { x: null, y: null, active: false };
-//
-//     function resizeCanvas() {
-//       canvas.width = window.innerWidth;
-//       canvas.height = window.innerHeight;
-//     }
-//     resizeCanvas();
-//     window.addEventListener('resize', resizeCanvas);
-//
-//     window.addEventListener('mousemove', (e) => {
-//       mouse.x = e.clientX;
-//       mouse.y = e.clientY;
-//       mouse.active = true;
-//     });
-//
-//     window.addEventListener('mouseleave', () => {
-//       mouse.active = false;
-//     });
-//
-//     // Web shoot on click
-//     window.addEventListener('click', (e) => {
-//       if (
-//         e.target.tagName === 'A' ||
-//         e.target.tagName === 'BUTTON' ||
-//         e.target.closest('a') ||
-//         e.target.closest('button')
-//       )
-//         return;
-//       shootWeb(e.clientX, e.clientY);
-//     });
-//
-//     class Particle {
-//       constructor(x, y) {
-//         this.x = x || Math.random() * canvas.width;
-//         this.y = y || Math.random() * canvas.height;
-//         this.vx = (Math.random() - 0.5) * 0.8;
-//         this.vy = (Math.random() - 0.5) * 0.8;
-//         this.radius = Math.random() * 2.5 + 1;
-//         this.color =
-//           Math.random() > 0.5
-//             ? 'rgba(0, 0, 0, 0.4)'
-//             : 'rgba(255, 84, 112, 0.75)'; // Ink or main, flat
-//       }
-//
-//       update() {
-//         this.x += this.vx;
-//         this.y += this.vy;
-//
-//         // Collision bounds
-//         if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-//         if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-//       }
-//
-//       draw() {
-//         ctx.beginPath();
-//         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-//         ctx.fillStyle = this.color;
-//         ctx.fill();
-//       }
-//     }
-//
-//     function initParticles() {
-//       particles = [];
-//       for (let i = 0; i < maxParticles; i++) {
-//         particles.push(new Particle());
-//       }
-//     }
-//     initParticles();
-//
-//     function shootWeb(x, y) {
-//       for (let i = 0; i < 8; i++) {
-//         const p = new Particle(x, y);
-//         p.vx = (Math.random() - 0.5) * 4;
-//         p.vy = (Math.random() - 0.5) * 4;
-//         p.color = 'rgba(255, 84, 112, 0.9)'; // Main colour on click
-//         particles.push(p);
-//         if (particles.length > maxParticles + 15) {
-//           particles.shift();
-//         }
-//       }
-//     }
-//
-//     function animate() {
-//       ctx.clearRect(0, 0, canvas.width, canvas.height);
-//
-//       particles.forEach((p) => {
-//         p.update();
-//         p.draw();
-//       });
-//
-//       // Draw web lines
-//       for (let i = 0; i < particles.length; i++) {
-//         for (let j = i + 1; j < particles.length; j++) {
-//           const dx = particles[i].x - particles[j].x;
-//           const dy = particles[i].y - particles[j].y;
-//           const dist = Math.sqrt(dx * dx + dy * dy);
-//
-//           if (dist < connectionDist) {
-//             const alpha = (1 - dist / connectionDist) * 0.15;
-//             ctx.strokeStyle = `rgba(0, 0, 0, ${alpha * 1.6})`; // Black web line
-//             ctx.lineWidth = 0.5;
-//             ctx.beginPath();
-//             ctx.moveTo(particles[i].x, particles[i].y);
-//             ctx.lineTo(particles[j].x, particles[j].y);
-//             ctx.stroke();
-//           }
-//         }
-//
-//         // Connect mouse to nearby particles
-//         if (mouse.active) {
-//           const dx = particles[i].x - mouse.x;
-//           const dy = particles[i].y - mouse.y;
-//           const dist = Math.sqrt(dx * dx + dy * dy);
-//
-//           if (dist < connectionDist + 30) {
-//             const alpha = (1 - dist / (connectionDist + 30)) * 0.25;
-//             ctx.strokeStyle = `rgba(0, 0, 0, ${alpha * 1.8})`; // Black cursor web
-//             ctx.lineWidth = 0.7;
-//             ctx.beginPath();
-//             ctx.moveTo(particles[i].x, particles[i].y);
-//             ctx.lineTo(mouse.x, mouse.y);
-//             ctx.stroke();
-//           }
-//         }
-//       }
-//
-//       requestAnimationFrame(animate);
-//     }
-//     animate();
-//   }
+  //   /* ==========================================================================
+  //      CANVAS SPIDER-WEB INTERACTION
+  //      ========================================================================== */
+  //   const canvas = document.getElementById('spidey-web-canvas');
+  //   if (canvas) {
+  //     const ctx = canvas.getContext('2d');
+  //     let particles = [];
+  //     const maxParticles = 65;
+  //     const connectionDist = 120;
+  //     let mouse = { x: null, y: null, active: false };
+  //
+  //     function resizeCanvas() {
+  //       canvas.width = window.innerWidth;
+  //       canvas.height = window.innerHeight;
+  //     }
+  //     resizeCanvas();
+  //     window.addEventListener('resize', resizeCanvas);
+  //
+  //     window.addEventListener('mousemove', (e) => {
+  //       mouse.x = e.clientX;
+  //       mouse.y = e.clientY;
+  //       mouse.active = true;
+  //     });
+  //
+  //     window.addEventListener('mouseleave', () => {
+  //       mouse.active = false;
+  //     });
+  //
+  //     // Web shoot on click
+  //     window.addEventListener('click', (e) => {
+  //       if (
+  //         e.target.tagName === 'A' ||
+  //         e.target.tagName === 'BUTTON' ||
+  //         e.target.closest('a') ||
+  //         e.target.closest('button')
+  //       )
+  //         return;
+  //       shootWeb(e.clientX, e.clientY);
+  //     });
+  //
+  //     class Particle {
+  //       constructor(x, y) {
+  //         this.x = x || Math.random() * canvas.width;
+  //         this.y = y || Math.random() * canvas.height;
+  //         this.vx = (Math.random() - 0.5) * 0.8;
+  //         this.vy = (Math.random() - 0.5) * 0.8;
+  //         this.radius = Math.random() * 2.5 + 1;
+  //         this.color =
+  //           Math.random() > 0.5
+  //             ? 'rgba(0, 0, 0, 0.4)'
+  //             : 'rgba(255, 84, 112, 0.75)'; // Ink or main, flat
+  //       }
+  //
+  //       update() {
+  //         this.x += this.vx;
+  //         this.y += this.vy;
+  //
+  //         // Collision bounds
+  //         if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+  //         if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+  //       }
+  //
+  //       draw() {
+  //         ctx.beginPath();
+  //         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+  //         ctx.fillStyle = this.color;
+  //         ctx.fill();
+  //       }
+  //     }
+  //
+  //     function initParticles() {
+  //       particles = [];
+  //       for (let i = 0; i < maxParticles; i++) {
+  //         particles.push(new Particle());
+  //       }
+  //     }
+  //     initParticles();
+  //
+  //     function shootWeb(x, y) {
+  //       for (let i = 0; i < 8; i++) {
+  //         const p = new Particle(x, y);
+  //         p.vx = (Math.random() - 0.5) * 4;
+  //         p.vy = (Math.random() - 0.5) * 4;
+  //         p.color = 'rgba(255, 84, 112, 0.9)'; // Main colour on click
+  //         particles.push(p);
+  //         if (particles.length > maxParticles + 15) {
+  //           particles.shift();
+  //         }
+  //       }
+  //     }
+  //
+  //     function animate() {
+  //       ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //
+  //       particles.forEach((p) => {
+  //         p.update();
+  //         p.draw();
+  //       });
+  //
+  //       // Draw web lines
+  //       for (let i = 0; i < particles.length; i++) {
+  //         for (let j = i + 1; j < particles.length; j++) {
+  //           const dx = particles[i].x - particles[j].x;
+  //           const dy = particles[i].y - particles[j].y;
+  //           const dist = Math.sqrt(dx * dx + dy * dy);
+  //
+  //           if (dist < connectionDist) {
+  //             const alpha = (1 - dist / connectionDist) * 0.15;
+  //             ctx.strokeStyle = `rgba(0, 0, 0, ${alpha * 1.6})`; // Black web line
+  //             ctx.lineWidth = 0.5;
+  //             ctx.beginPath();
+  //             ctx.moveTo(particles[i].x, particles[i].y);
+  //             ctx.lineTo(particles[j].x, particles[j].y);
+  //             ctx.stroke();
+  //           }
+  //         }
+  //
+  //         // Connect mouse to nearby particles
+  //         if (mouse.active) {
+  //           const dx = particles[i].x - mouse.x;
+  //           const dy = particles[i].y - mouse.y;
+  //           const dist = Math.sqrt(dx * dx + dy * dy);
+  //
+  //           if (dist < connectionDist + 30) {
+  //             const alpha = (1 - dist / (connectionDist + 30)) * 0.25;
+  //             ctx.strokeStyle = `rgba(0, 0, 0, ${alpha * 1.8})`; // Black cursor web
+  //             ctx.lineWidth = 0.7;
+  //             ctx.beginPath();
+  //             ctx.moveTo(particles[i].x, particles[i].y);
+  //             ctx.lineTo(mouse.x, mouse.y);
+  //             ctx.stroke();
+  //           }
+  //         }
+  //       }
+  //
+  //       requestAnimationFrame(animate);
+  //     }
+  //     animate();
+  //   }
 
   /* ==========================================================================
      DYNAMIC TROPHY ROOM RENDERING & FILTERS
@@ -661,6 +667,23 @@ document.addEventListener('DOMContentLoaded', () => {
         'JavaScript',
         'Responsive Web Design',
         'E-commerce UI',
+      ],
+    },
+    {
+      name: 'Virtual Tour 360',
+      category: 'personal',
+      categoryLabel: 'Friendly (Personal Demo)',
+      desc: 'Interactive 360° project showcase with horizontal drag-to-rotate panorama across 61 frames, intro video, day/night toggle, and adjustable drag sensitivity. Built with plain HTML/CSS/JS with no build step.',
+      url: 'assets/img/virtual-tour360.webp',
+      link: 'https://virtual-tour360-test.vercel.app',
+      git: 'https://github.com/luongic/virtualTour360Test',
+      tags: [
+        'HTML5',
+        'CSS3',
+        'JavaScript',
+        '360° Tour',
+        'Interactive UI',
+        'Pointer Events',
       ],
     },
     {
