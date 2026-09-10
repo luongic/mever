@@ -670,6 +670,23 @@ document.addEventListener('DOMContentLoaded', () => {
       ],
     },
     {
+      name: 'City Comparison',
+      category: 'personal',
+      categoryLabel: 'Friendly (Personal Demo)',
+      desc: 'Side-by-side statistics explorer for all 63 Vietnamese provinces. Pairs an interactive D3 GeoJSON map with radar, bar, pie, growth and table views, backed by an AI layer that fills missing figures and writes insights through a cached, schema-validated serverless endpoint.',
+      url: 'assets/img/city-comparison.webp',
+      link: 'https://city-comparison.vercel.app',
+      git: 'https://github.com/luongic/city-comparison',
+      tags: [
+        'React.js',
+        'TypeScript',
+        'Vite',
+        'D3-geo',
+        'Recharts',
+        'AI Integration',
+      ],
+    },
+    {
       name: 'Virtual Tour 360',
       category: 'personal',
       categoryLabel: 'Friendly (Personal Demo)',
